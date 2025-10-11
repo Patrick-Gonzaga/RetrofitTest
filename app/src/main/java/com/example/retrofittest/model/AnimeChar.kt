@@ -1,10 +1,11 @@
 package com.example.retrofittest.model
 
 data class AnimeChar(
-    var idChar: Int,
-    var nameChar: String,
-    var nameAnime: String,
-    var urlImage: String,
-    var kakeraPoints: Int,
-    var sexChar: Char
+    val idChar: Int,
+    val nameChar: String,
+    val nameKanji: String,
+    val nameAnime: String?,
+    val urlImage: String,
+    val kakeraPoints: Int?
+
 )

@@ -7,43 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="hint" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        tools:listitem="@layout/item_rv" />
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:backgroundTint="#F7F1FF"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/btnRoll">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:layout_marginVertical="6dp"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp"
+            tools:listitem="@layout/item_rv" />
+    </androidx.cardview.widget.CardView>
+
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -59,7 +58,6 @@
                 android:id="@+id/bigAvatarChar"
                 android:layout_width="200dp"
                 android:layout_height="300dp"
-                android:layout_marginStart="8dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,45 +76,35 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/bigNameAnime"
-                android:layout_width="170dp"
+                android:id="@+id/nameKanji"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Name Anime"
+                android:text="Name Kanji"
                 android:textSize="18dp"
                 app:layout_constraintStart_toEndOf="@+id/bigAvatarChar"
                 app:layout_constraintTop_toBottomOf="@+id/bigNameChar" />
 
             <TextView
-                android:id="@+id/sexText"
-                android:layout_width="wrap_content"
+                android:id="@+id/bigNameAnime"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Sex:"
+                android:text=""
                 android:textSize="18dp"
                 app:layout_constraintStart_toEndOf="@+id/bigAvatarChar"
-                app:layout_constraintTop_toBottomOf="@+id/bigNameAnime" />
-
-            <ImageView
-                android:id="@+id/imgSex"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/sexText"
-                app:layout_constraintStart_toEndOf="@+id/sexText"
-                app:layout_constraintTop_toTopOf="@+id/sexText"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:layout_constraintTop_toBottomOf="@+id/nameKanji" />
 
             <LinearLayout
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@+id/sexText"
-                app:layout_constraintTop_toBottomOf="@+id/sexText">
+                app:layout_constraintStart_toStartOf="@+id/bigNameAnime"
+                app:layout_constraintTop_toBottomOf="@+id/bigNameAnime">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -124,9 +112,9 @@
                     android:src="@drawable/ic_kakera" />
 
                 <View
-                    android:layout_width="wrap_content"
+                    android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/kakeraPoints"
@@ -144,6 +132,30 @@
                 android:text="00000"
                 app:layout_constraintStart_toStartOf="@+id/bigNameChar"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:visibility="invisible"
+                android:indeterminateTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/bigAvatarChar"
+                app:layout_constraintEnd_toEndOf="@+id/bigAvatarChar"
+                app:layout_constraintStart_toStartOf="@+id/bigAvatarChar"
+                app:layout_constraintTop_toTopOf="@+id/bigAvatarChar" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnRoll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:text="Roll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
