@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
             val service = retrofit.create(AnimeCharAPI::class.java)
             val response = service.getAnimeChar(randomNum)
 
-            if (response.isSuccessful) {
+            if (response.isSuccessful && response.body()?.data?.images?.jpg?.image_url != RetrofitHelper.urlDefaultImage) {
                 val animeCharResponse = response.body()?.data ?: return@withContext false
                 animeCharResponse.apply {
                     Log.i("info_anime", "anime name : ${anime?.firstOrNull()?.anime?.title}")
@@ -168,9 +168,13 @@ class MainActivity : AppCompatActivity() {
                         idChar = mal_id,
                         nameKanji = name_kanji ?: "",
                         urlImage = images?.jpg?.image_url ?: "",
-                        kakeraPoints = favorites ?: 0
+                        kakeraPoints = favorites?.let{
+                            if (it <= 30) (20..50).random()
+                            else it
+                        }
                     ).also { animeChar ->
                         withContext(Dispatchers.Main) {
+                            listChar.add(0, animeChar)
                             adapter.updateList(listChar)
 
                             binding.apply {
@@ -186,11 +190,7 @@ class MainActivity : AppCompatActivity() {
                                 kakeraPoints.text = animeChar.kakeraPoints.toString()
                                 idChar.text = animeChar.idChar.toString()
                                 Glide.with(applicationContext)
-                                    .load(
-                                        if (animeChar.urlImage == RetrofitHelper.urlDefaultImage) {
-                                            R.drawable.confused_anime_404
-                                        } else animeChar.urlImage
-                                    )
+                                    .load(animeChar.urlImage)
                                     .placeholder(R.drawable.confused_anime)
                                     .error(R.drawable.confused_anime_404)
                                     .listener(object: RequestListener<Drawable>{
@@ -216,7 +216,7 @@ class MainActivity : AppCompatActivity() {
                                         }
                                     })
                                     .into(bigAvatarChar)
-                                listChar.add(animeChar)
+
 
                                 /*animeCharResponse.apply {
                                     name?.length?.let {
